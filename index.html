@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>THE XPEDITION SAFARI — Panel</title>
+<style>
+:root{
+  /* Atardecer africano */
+  --bg:#fff2d9; --bg-2:#ffe2b5; --tile:#fffaf3; --tile-2:#fff2df; --ink:#3a2205;
+  --accent:#ff9a29; --accent-2:#ffb347; --badge:#8a3c00; --host:#d96e00; --staff:#2aa84a; --glow:#ffd35a;
+  
+  /* Colores de equipos */
+  --team-1:#daae42;   /* Leones */
+  --team-2:#4b8f4a;   /* Serpientes */
+  --team-3:#000000;   /* Cebras */
+  --team-4:#a33030;   /* Guepardos */
+  --team-5:#b87333;   /* Escorpiones */
+}
+
+.team-3 .team-name, /* Cebras */
+.team-4 .team-name { /* Guepardos */
+  color: white !important;
+}
+/* Equipos de abajo más juntos */
+.teams-bottom{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:8px; /* antes 14px */
+  justify-items:center;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color:var(--ink);
+  background: linear-gradient(180deg, #ff9a29 0%, #ffb347 30%, #ffd35a 60%, #ffe9cc 100%);
+  overflow-x:hidden;
+}
+a{color:inherit}
+img{max-width:100%; height:auto; display:block}
+
+/* Contenedores */
+.wrap{ max-width:1200px; margin:16px auto; padding:12px 16px }
+.glass{
+  background: rgba(255,255,255,0.55); border:1px solid rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px) saturate(140%); border-radius:20px;
+  box-shadow: 0 10px 30px rgba(138,60,0,0.10);
+}
+
+/* Header */
+.header{ display:flex; gap:16px; align-items:center; justify-content:space-between }
+.logo-zone{ flex:1 }
+.logo-box{
+  position:relative; min-height:90px; border:2px dashed #ffdba6; border-radius:16px;
+  display:grid; place-items:center; background:linear-gradient(180deg,#fff,#fff7ea); overflow:hidden;
+}
+.logo-img{ max-height:120px; width:auto; }
+
+/* Tools */
+.tools{ display:flex; align-items:center; gap:10px }
+.search{ padding:12px 14px; border-radius:14px; border:1px solid #ffe0b9; background:#fff; min-width:260px; font-weight:600 }
+.btn{ padding:12px 14px; border-radius:14px; border:1px solid #ffe0b9; background:#fff; font-weight:700; cursor:pointer }
+.btn:hover{ transform:translateY(-1px) }
+
+/* ====== EQUIPOS ====== */
+.teams-top{ display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-bottom:4px }
+.teams-bottom{ display:grid; grid-template-columns: repeat(2, 1fr); gap:4px; justify-items:center }
+.team-card{
+  display:grid; grid-template-columns: 120px 1fr; align-items:center;
+  gap:18px; padding:12px; border:1px solid #ffd7a0; border-radius:16px; position:relative;
+}
+.team-1{ background: var(--team-1) } .team-2{ background: var(--team-2) } .team-3{ background: var(--team-3) }
+.team-4{ background: var(--team-4) } .team-5{ background: var(--team-5) }
+
+.team-media .square{
+  position:relative; display:block; width:110px; height:110px; border-radius:12px;
+  border:1px dashed #ffc97d; background:#fff; overflow:hidden;
+}
+.square-img{ width:100%; height:100%; object-fit:cover; display:block }
+
+/* Brillo solar al hover/tap (equipos, personajes, awards) */
+.sunable{ position:relative; overflow:hidden }
+.sunable::after{
+  content:""; position:absolute; inset:-40%; border-radius:20px;
+  background: radial-gradient(140px 140px at var(--mx,50%) var(--my,50%), rgba(255,210,90,.85), transparent 60%);
+  opacity:0; transition:opacity .2s ease;
+}
+.sunable:hover::after, .sunable.tap::after{ opacity:.95; animation:sunpulse 1.2s ease-out forwards }
+@keyframes sunpulse{
+  0%{transform:scale(.8); opacity:.0}
+  30%{transform:scale(1); opacity:.95}
+  100%{transform:scale(1.08); opacity:.0}
+}
+
+/* ====== GRID PERSONAJES ====== */
+.grid{ display:grid; grid-template-columns: repeat(5, minmax(180px,1fr)); gap:14px }
+@media (max-width:1100px){ .grid{ grid-template-columns: repeat(4, minmax(160px,1fr)) } }
+@media (max-width:900px){  .grid{ grid-template-columns: repeat(3, minmax(150px,1fr)) } }
+@media (max-width:650px){  .grid{ grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px } }
+
+.card{
+  position:relative; background:var(--tile); border:1px solid #ffd7a0; border-radius:18px; padding:12px;
+  box-shadow: 0 6px 18px rgba(120,50,0,0.10);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover{ transform: translateY(-6px) rotate(-0.3deg); box-shadow: 0 16px 28px rgba(120,50,0,0.18) }
+.card .top-badge{
+  position:absolute; left:50%; transform:translateX(-50%); top:-10px;
+  background:var(--badge); color:#fff; font-size:12px; font-weight:800; padding:4px 10px; border-radius:999px; letter-spacing:.6px;
+  border:1px solid rgba(255,255,255,.3);
+}
+.top-badge.host{ background:var(--host) }
+.top-badge.staff{ background:var(--staff) }
+
+.avatar{
+  position:relative; height:120px; border-radius:14px; background:linear-gradient(180deg,#fff5e6,#fff);
+  border:1px dashed #ffd7a0; display:grid; place-items:center; margin-bottom:10px; overflow:hidden;
+}
+.avatar img{ width:100%; height:100%; object-fit:cover; display:block }
+.name{ font-size:20px; font-weight:800; letter-spacing:.2px; margin:0; text-align:center }
+.pos{ margin:4px 0 0 0; text-align:center; color:#6a4a22; font-weight:700; font-size:13px }
+
+/* Track */
+.track .track-head{ display:flex; align-items:center; justify-content:space-between; font-weight:800 }
+.track .track-preview{ display:grid; place-items:center; border:2px dashed #ffc97d; border-radius:16px; min-height:180px; margin-top:10px; background:linear-gradient(180deg,#fff,#fff7ea) }
+
+/* AWARDS */
+.awards { margin-top: 16px; }
+.awards-head { font-weight: 900; letter-spacing: .6px; margin-bottom: 8px; }
+.awards-grid { display:grid; grid-template-columns: repeat(5, minmax(180px,1fr)); gap:14px }
+@media (max-width:1100px){ .awards-grid{ grid-template-columns: repeat(4, minmax(160px,1fr)) } }
+@media (max-width:900px){  .awards-grid{ grid-template-columns: repeat(3, minmax(150px,1fr)) } }
+@media (max-width:650px){  .awards-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px } }
+.award.card { position:relative }
+.award .badge-sun { position:absolute; right:8px; top:-10px; font-size:20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); }
+
+/* SAFARI SHOWDOWN */
+.showdown .title{ font-size:28px; font-weight:900; margin:6px 0 0 }
+.showdown .logo-box{ min-height:90px }
+.subhead{ font-weight:900; margin:16px 0 8px }
+.bracket{ display:grid; grid-template-columns: repeat(6, minmax(120px,1fr)); gap:12px }
+@media (max-width:900px){ .bracket{ grid-template-columns: repeat(3, minmax(120px,1fr)) } }
+@media (max-width:650px){ .bracket{ grid-template-columns: repeat(3, minmax(0,1fr)) } }
+.badge-emoji{
+  position:absolute; right:8px; top:-10px; font-size:20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.2));
+}
+
+/* Móvil compact */
+@media (max-width:650px){
+  .wrap{ padding:10px 12px }
+  .card{ padding:10px }
+  .avatar{ height:96px }
+  .name{ font-size:16px }
+  .pos{ font-size:12px }
+  .logo-box{ min-height:72px }
+  .logo-img{ max-height:72px }
+  .track .track-preview{ min-height:120px }
+  html, body{ overflow-x:hidden }
+}
+</style>
+</head>
+<body>
+<!-- TOP: LOGO + BUSCAR -->
+<header class="wrap glass header">
+<div class="logo-zone">
+<div class="logo-box sunable" id="logoArea">
+<img alt="Logo Expedition Safari" class="logo-img" id="logoImg"/>
+</div>
+</div>
+<div class="tools">
+<input class="search" id="search" placeholder="Buscar participante…"/>
+<button class="btn" id="clearSearch">Limpiar</button>
+</div>
+</header>
+<!-- TEAMS (5): 3 arriba + 2 centrados -->
+<section class="wrap glass">
+<div class="teams-top" id="teamsTop"></div>
+<div class="teams-bottom" id="teamsBottom"></div>
+</section>
+<!-- GRID 30 PARTICIPANTES -->
+<main class="wrap">
+<section class="grid" id="cardGrid"></section>
+</main>
+<!-- TRACK RECORD GENERAL -->
+<section class="wrap glass track">
+<div class="track-head"><span>TRACK RECORD (PNG)</span></div>
+<div class="track-preview"><img alt="Track Record" id="trackPreview"/></div>
+</section>
+<!-- AWARDS -->
+<section class="wrap glass awards">
+<div class="awards-head"><span>AWARDS</span></div>
+<div class="awards-grid" id="awardsGrid"></div>
+</section>
+<!-- SAFARI SHOWDOWN -->
+<section class="wrap glass showdown">
+<div class="logo-box sunable">
+<img alt="Safari Showdown" class="logo-img" id="showdownLogo"/>
+</div>
+<h2 class="title">Safari Showdown</h2>
+<div class="subhead">Bracket 1</div>
+<div class="bracket" id="br1"></div>
+<div class="subhead">Bracket 2</div>
+<div class="bracket" id="br2"></div>
+<div class="subhead">Bracket 3</div>
+<div class="bracket" id="br3"></div>
+<!-- Track específico de Showdown -->
+<div class="track" style="margin-top:16px">
+<div class="track-head"><span>Safari Showdown — Track Record (PNG)</span></div>
+<div class="track-preview"><img alt="Track Showdown" id="trackShowdown"/></div>
+</div>
+</section>
+<script>
+/* Utilidades */
+const $ = (s,el=document)=>el.querySelector(s); const $$=(s,el=document)=>[...el.querySelectorAll(s)];
+function slug(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ñ/g,'n').replace(/[^a-z0-9]+/g,'').trim() }
+function tryImageCandidates(imgEl, candidates){
+  let i=0; function setNext(){
+    if(i>=candidates.length){ return; }
+    const src = candidates[i++]; const tester = new Image();
+    tester.onload = ()=>{ imgEl.src = src; };
+    tester.onerror = ()=> setNext();
+    tester.src = src;
+  } setNext();
+}
+/* Seguir la posición del mouse para el brillo */
+document.addEventListener('mousemove', e=>{
+  document.querySelectorAll('.sunable').forEach(el=>{
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+});
+/* Tap = simular hover del brillo en móvil */
+function enableTapSun(selector){
+  document.querySelectorAll(selector).forEach(el=>{
+    el.addEventListener('touchstart', ()=>{
+      el.classList.add('tap'); setTimeout(()=> el.classList.remove('tap'), 900);
+    }, {passive:true});
+  });
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  enableTapSun('.avatar.sunable');
+  enableTapSun('.team-card .square.sunable');
+});
+
+/* LOGO superior y Track */
+tryImageCandidates($('#logoImg'), ['Personajes/logo-safari.png','Personajes/LogoSafari.png','Personajes/logo.png','Personajes/Logo.png']);
+tryImageCandidates($('#trackPreview'), ['Personajes/Track Record.png','Personajes/TrackRecord.png','Personajes/track.png']);
+
+/* ===== Equipos (5) ===== */
+const teamsData = [
+  {name:'Equipo Leonés',    class:'team-1', candidates:['Personajes/EquipoLeones.png','Personajes/Leones.png','Personajes/Leon.png']},
+  {name:'Equipo Serpientes',class:'team-2', candidates:['Personajes/EquipoSerpientes.png','Personajes/Serpientes.png','Personajes/Serpiente.png']},
+  {name:'Equipo Cebras',    class:'team-3', candidates:['Personajes/EquipoCebras.png','Personajes/Cebras.png','Personajes/Cebra.png']},
+  {name:'Equipo Guepardos', class:'team-4', candidates:['Personajes/EquipoGuepardos.png','Personajes/Guepardos.png','Personajes/Guepardo.png']},
+  {name:'Equipo Escorpiones',class:'team-5', candidates:['Personajes/EquipoEscorpiones.png','Personajes/Escorpiones.png','Personajes/Escorpion.png']}
+];
+const teamsTop = $('#teamsTop'); const teamsBottom = $('#teamsBottom');
+teamsData.slice(0,3).forEach(t=>{
+  const card = document.createElement('div'); card.className=`team-card ${t.class}`;
+  card.innerHTML = `
+    <div class="team-media">
+      <div class="square sunable"><img class="square-img" alt="${t.name}"></div>
+    </div>
+    <div class="team-info"><h3 class="team-name">${t.name}</h3></div>`;
+  teamsTop.appendChild(card);
+  tryImageCandidates(card.querySelector('img'), t.candidates);
+});
+teamsData.slice(3).forEach(t=>{
+  const card = document.createElement('div'); card.className=`team-card ${t.class}`;
+  card.innerHTML = `
+    <div class="team-media">
+      <div class="square sunable"><img class="square-img" alt="${t.name}"></div>
+    </div>
+    <div class="team-info"><h3 class="team-name">${t.name}</h3></div>`;
+  teamsBottom.appendChild(card);
+  tryImageCandidates(card.querySelector('img'), t.candidates);
+});
+
+/* ===== Participantes (30) ===== */
+/* Orden exacto (Bonju=29 Host, Dua=30 Staff). Se omite “Ignacio” para mantener 30. */
+const participants = [
+  'Coronel','Peggy','Julián','Alexandro','Isabel','Pier',
+  'Bryan Montalvo','Daelly','Andromeda','Luciano','Iñaella Rose','Ximena',
+  /* 'Ignacio', */ 'Ignacio Ricci','Lucas Mendez','Greg','Garnet','Elvin',
+  'Bayron','Oscar','Sandro','Esteban','Rafael','Emmy Mango','Lalamila',
+  'Cocomong','Azealia Midnight','Eris Midnight','Catalina','Bonju','Dua Lengua'
+];
+const grid = $('#cardGrid');
+participants.forEach((name, idx)=>{
+  const card = document.createElement('article'); card.className = 'card';
+  if(idx===28){ const b=document.createElement('div'); b.className='top-badge host'; b.textContent='HOST'; card.appendChild(b); }
+  if(idx===29){ const b=document.createElement('div'); b.className='top-badge staff'; b.textContent='STAFF'; card.appendChild(b); }
+  const av = document.createElement('div'); av.className='avatar sunable';
+  const img = document.createElement('img'); av.appendChild(img);
+  card.appendChild(av);
+  const h3 = document.createElement('h3'); h3.className='name'; h3.textContent=name; card.appendChild(h3);
+  const pos = document.createElement('div'); pos.className='pos'; pos.textContent=''; card.appendChild(pos);
+  grid.appendChild(card);
+  const base = slug(name);
+  tryImageCandidates(img, [
+    `Personajes/${name}.png`,`Personajes/${name}.jpg`,`Personajes/${name}.jpeg`,
+    `Personajes/${base}.png`,`Personajes/${base}.jpg`,`Personajes/${base}.jpeg`,
+    `Personajes/${(name.split(' ')[0]||'').trim()}.png`,`Personajes/${(name.split(' ')[0]||'').trim()}.jpg`
+  ]);
+});
+
+/* Buscar */
+$('#search').addEventListener('input', ()=>{
+  const q = $('#search').value.toLowerCase().trim();
+  $$('#cardGrid .card').forEach(c=>{
+    const n = c.querySelector('.name').textContent.toLowerCase();
+    c.style.display = (!q || n.includes(q)) ? '' : 'none';
+  });
+});
+$('#clearSearch').addEventListener('click', ()=>{ $('#search').value=''; $('#search').dispatchEvent(new Event('input')); });
+
+/* ===== AWARDS ===== */
+const awardsData = [
+  {name:'Mister Congeniality', icon:'☀️', slug:'mistercongeniality'},
+  {name:'Fan Favorite', icon:'☀️', slug:'fanfavorite'},
+  {name:'Best Villain', icon:'☀️', slug:'bestvillain'},
+  {name:'Best Competitor', icon:'☀️', slug:'bestcompetitor'},
+  {name:'Poop Of The Year', icon:'💩', slug:'poopoftheyear'}
+];
+const awardsGrid = document.getElementById('awardsGrid');
+awardsData.forEach(a=>{
+  const card = document.createElement('article'); card.className='card award';
+  const badge = document.createElement('div'); badge.className='badge-sun'; badge.textContent=a.icon; card.appendChild(badge);
+  const avatar = document.createElement('div'); avatar.className='avatar sunable';
+  const img = document.createElement('img'); avatar.appendChild(img); card.appendChild(avatar);
+  const title = document.createElement('h3'); title.className='name'; title.textContent=a.name; card.appendChild(title);
+  const pos = document.createElement('div'); pos.className='pos'; pos.textContent=''; card.appendChild(pos);
+  awardsGrid.appendChild(card);
+  tryImageCandidates(img, [
+    `Personajes/Awards/${a.slug}.png`,`Personajes/Awards/${a.slug}.jpg`,`Personajes/Awards/${a.slug}.jpeg`
+  ]);
+});
+
+/* ===== Safari Showdown ===== */
+tryImageCandidates($('#showdownLogo'), ['Personajes/SafariShowdown.png','Personajes/Showdown.png']);
+tryImageCandidates($('#trackShowdown'), ['Personajes/Track Showdown.png','Personajes/TrackShowdown.png']);
+
+/* ———> NUEVO: carpeta exclusiva para las imágenes del Showdown */
+const SHOWDOWN_DIR = 'Personajes/Showdown/';
+function showdownCandidates(name){
+  const base = slug(name);
+  const enc  = encodeURIComponent(name);
+  return [
+    `${SHOWDOWN_DIR}${enc}.png`,
+    `${SHOWDOWN_DIR}${enc}.jpg`,
+    `${SHOWDOWN_DIR}${base}.png`,
+    `${SHOWDOWN_DIR}${base}.jpg`,
+    // Fallback especial si pones “Bryan” pero tu archivo se llama “Bryan Montalvo”
+    ...(name==='Bryan' ? [
+      `${SHOWDOWN_DIR}Bryan%20Montalvo.png`,
+      `${SHOWDOWN_DIR}Bryan%20Montalvo.jpg`,
+      `${SHOWDOWN_DIR}bryanmontalvo.png`,
+      `${SHOWDOWN_DIR}bryanmontalvo.jpg`
+    ] : [])
+  ];
+}
+
+/* Brackets (los dejo tal cual los tienes) */
+const bracket1 = [
+  {name:'Alexandro', mark:'✅'},
+  {name:'Bayron'},
+  {name:'Garnet'},
+  {name:'Greg'},
+  {name:'Isabel', mark:'✅'},
+  {name:'Rafael', mark:'✅'}
+];
+const bracket2 = [
+  {name:'Andromeda'},
+  {name:'Eris Midnight', mark:'✅'},
+  {name:'Esteban', mark:'🍀'},
+  {name:'Ignacio Ricci', mark:'✅'},
+  {name:'Lalamila', mark:'✅'},
+  {name:'Pier'}
+];
+const bracket3 = [
+  {name:'Bryan'},
+  {name:'Catalina'},
+  {name:'Iñaella Rose'},
+  {name:'Lucas Mendez', mark:'✅'},
+  {name:'Luciano', mark:'✅'},
+  {name:'Oscar', mark:'✅'}
+];
+
+function fillBracket(el, arr){
+  arr.forEach(item=>{
+    const card = document.createElement('article'); card.className='card';
+    if(item.mark){
+      const b = document.createElement('div'); b.className='badge-emoji'; b.textContent=item.mark; card.appendChild(b);
+    }
+    const av = document.createElement('div'); av.className='avatar sunable';
+    const img = document.createElement('img'); av.appendChild(img); card.appendChild(av);
+    const nm = document.createElement('h3'); nm.className='name'; nm.textContent=item.name; card.appendChild(nm);
+    const ps = document.createElement('div'); ps.className='pos'; ps.textContent=''; card.appendChild(ps);
+    el.appendChild(card);
+
+    // ———> NUEVO: siempre buscar en Personajes/Showdown/
+    tryImageCandidates(img, showdownCandidates(item.name));
+  });
+}
+fillBracket($('#br1'), bracket1);
+fillBracket($('#br2'), bracket2);
+fillBracket($('#br3'), bracket3);
+</script>
+</body>
+</html>
