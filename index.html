@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>The Xpedition Safari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  /* Atardecer africano */
+:root {
+  /* Atardecer africano premium */
   --bg:#fff2d9; --bg-2:#ffe2b5; --tile:#fffaf3; --tile-2:#fff2df; --ink:#3a2205;
   --accent:#ff9a29; --accent-2:#ffb347; --badge:#8a3c00; --host:#d96e00; --staff:#2aa84a; --glow:#ffd35a;
   
@@ -19,184 +21,328 @@
   --team-5:#b87333;   /* Escorpiones */
 }
 
-.team-3 .team-name, /* Cebras */
-.team-4 .team-name { /* Guepardos */
-  color: white !important;
-}
-/* Equipos de abajo más juntos */
-.teams-bottom{
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap:8px; /* antes 14px */
-  justify-items:center;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  color:var(--ink);
+* { box-sizing: border-box; }
+html, body { min-height: 100%; margin: 0; padding: 0; }
+body {
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
   background: linear-gradient(180deg, #ff9a29 0%, #ffb347 30%, #ffd35a 60%, #ffe9cc 100%);
-  overflow-x:hidden;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
-a{color:inherit}
-img{max-width:100%; height:auto; display:block}
+
+a { color: inherit; text-decoration: none; }
 
 /* Contenedores */
-.wrap{ max-width:1200px; margin:16px auto; padding:12px 16px }
-.glass{
-  background: rgba(255,255,255,0.55); border:1px solid rgba(255,255,255,0.85);
-  backdrop-filter: blur(10px) saturate(140%); border-radius:20px;
-  box-shadow: 0 10px 30px rgba(138,60,0,0.10);
+.wrap { max-width: 1200px; margin: 24px auto; padding: 0 20px; }
+.glass {
+  background: rgba(255, 255, 255, 0.55); 
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px) saturate(140%); 
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(138, 60, 0, 0.08);
 }
 
 /* Header */
-.header{ display:flex; gap:16px; align-items:center; justify-content:space-between }
-.logo-zone{ flex:1 }
-.logo-box{
-  position:relative; min-height:90px; border:2px dashed #ffdba6; border-radius:16px;
-  display:grid; place-items:center; background:linear-gradient(180deg,#fff,#fff7ea); overflow:hidden;
+.header { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  padding: 20px;
 }
-.logo-img{ max-height:120px; width:auto; }
+@media (min-width: 768px) {
+  .header { flex-direction: row; align-items: center; justify-content: space-between; }
+}
+
+.logo-zone { 
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: #ffffff;
+  border: 1px solid #ffdba6;
+  border-radius: 12px;
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: bold;
+  transition: background 0.2s, transform 0.1s;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+.back-btn:hover {
+  background: var(--tile-2);
+  transform: translateX(-2px);
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.logo-img { max-height: 85px; width: auto; object-fit: contain; }
 
 /* Tools */
-.tools{ display:flex; align-items:center; gap:10px }
-.search{ padding:12px 14px; border-radius:14px; border:1px solid #ffe0b9; background:#fff; min-width:260px; font-weight:600 }
-.btn{ padding:12px 14px; border-radius:14px; border:1px solid #ffe0b9; background:#fff; font-weight:700; cursor:pointer }
-.btn:hover{ transform:translateY(-1px) }
+.tools { width: 100%; }
+@media (min-width: 768px) { .tools { width: auto; } }
 
-/* ====== EQUIPOS ====== */
-.teams-top{ display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-bottom:4px }
-.teams-bottom{ display:grid; grid-template-columns: repeat(2, 1fr); gap:4px; justify-items:center }
-.team-card{
-  display:grid; grid-template-columns: 120px 1fr; align-items:center;
-  gap:18px; padding:12px; border:1px solid #ffd7a0; border-radius:16px; position:relative;
+.search-wrap {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #ffdba6;
+  border-radius: 14px;
+  padding: 4px 6px 4px 14px;
 }
-.team-1{ background: var(--team-1) } .team-2{ background: var(--team-2) } .team-3{ background: var(--team-3) }
-.team-4{ background: var(--team-4) } .team-5{ background: var(--team-5) }
-
-.team-media .square{
-  position:relative; display:block; width:110px; height:110px; border-radius:12px;
-  border:1px dashed #ffc97d; background:#fff; overflow:hidden;
+.search {
+  border: none;
+  background: transparent;
+  padding: 8px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  outline: none;
+  width: 100%;
 }
-.square-img{ width:100%; height:100%; object-fit:cover; display:block }
+@media (min-width: 768px) { .search { min-width: 240px; } }
 
-/* Brillo solar al hover/tap (equipos, personajes, awards) */
-.sunable{ position:relative; overflow:hidden }
-.sunable::after{
-  content:""; position:absolute; inset:-40%; border-radius:20px;
-  background: radial-gradient(140px 140px at var(--mx,50%) var(--my,50%), rgba(255,210,90,.85), transparent 60%);
-  opacity:0; transition:opacity .2s ease;
+.clear-btn {
+  background: #fff;
+  border: 1px solid #ffdba6;
+  color: var(--ink);
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
 }
-.sunable:hover::after, .sunable.tap::after{ opacity:.95; animation:sunpulse 1.2s ease-out forwards }
-@keyframes sunpulse{
-  0%{transform:scale(.8); opacity:.0}
-  30%{transform:scale(1); opacity:.95}
-  100%{transform:scale(1.08); opacity:.0}
+.clear-btn:hover { background: var(--tile-2); }
+
+/* ====== EQUIPOS (UNIFICADOS EN UNA SOLA FILA HORIZONTAL) ====== */
+.teams-row-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  padding: 16px;
+}
+@media (max-width: 900px) {
+  .teams-row-container { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .teams-row-container { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ====== GRID PERSONAJES ====== */
-.grid{ display:grid; grid-template-columns: repeat(5, minmax(180px,1fr)); gap:14px }
-@media (max-width:1100px){ .grid{ grid-template-columns: repeat(4, minmax(160px,1fr)) } }
-@media (max-width:900px){  .grid{ grid-template-columns: repeat(3, minmax(150px,1fr)) } }
-@media (max-width:650px){  .grid{ grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px } }
+.team-card {
+  display: grid; 
+  grid-template-columns: 75px 1fr; 
+  align-items: center;
+  gap: 10px; 
+  padding: 10px; 
+  border: 1px solid #ffd7a0; 
+  border-radius: 14px; 
+  position: relative; 
+  width: 100%;
+}
+.team-1 { background: var(--team-1); } 
+.team-2 { background: var(--team-2); } 
+.team-3 { background: var(--team-3); }
+.team-4 { background: var(--team-4); } 
+.team-5 { background: var(--team-5); }
 
-.card{
-  position:relative; background:var(--tile); border:1px solid #ffd7a0; border-radius:18px; padding:12px;
-  box-shadow: 0 6px 18px rgba(120,50,0,0.10);
+.team-3 .team-name, .team-4 .team-name { color: white !important; }
+
+.team-media .square {
+  position: relative; 
+  display: block; 
+  width: 75px; 
+  height: 75px; 
+  border-radius: 10px;
+  border: none; 
+  background: #fff; 
+  overflow: hidden;
+}
+.square-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.team-info .team-name { margin: 0; font-size: 14px; font-weight: 800; line-height: 1.2; }
+
+/* ====== HEADERS SECCIONES ====== */
+.section-head {
+  font-weight: 800; 
+  letter-spacing: .6px; 
+  font-size: 16px; 
+  margin: 24px 0 14px 0;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-head::before {
+  content: ''; display: inline-block; width: 4px; height: 16px; background: var(--accent); border-radius: 2px;
+}
+
+/* ====== GRIDS PERSONAJES (ESTRICTO 5 POR FILA EN PC) ====== */
+.grid, .awards-grid { 
+  display: grid; 
+  grid-template-columns: repeat(5, minmax(180px, 1fr)); 
+  gap: 14px; 
+}
+@media (max-width: 1100px){ .grid, .awards-grid { grid-template-columns: repeat(4, minmax(160px,1fr)); } }
+@media (max-width: 900px){  .grid, .awards-grid { grid-template-columns: repeat(3, minmax(150px,1fr)); } }
+@media (max-width: 650px){  .grid, .awards-grid { grid-template-columns: repeat(2, minmax(140px,1fr)); } }
+
+.card {
+  position: relative; background: var(--tile); border: 1px solid #ffd7a0; border-radius: 18px; padding: 12px;
+  box-shadow: 0 6px 18px rgba(120,50,0,0.06);
   transition: transform .2s ease, box-shadow .2s ease;
+  display: flex;
+  flex-direction: column;
 }
-.card:hover{ transform: translateY(-6px) rotate(-0.3deg); box-shadow: 0 16px 28px rgba(120,50,0,0.18) }
-.card .top-badge{
-  position:absolute; left:50%; transform:translateX(-50%); top:-10px;
-  background:var(--badge); color:#fff; font-size:12px; font-weight:800; padding:4px 10px; border-radius:999px; letter-spacing:.6px;
-  border:1px solid rgba(255,255,255,.3);
-}
-.top-badge.host{ background:var(--host) }
-.top-badge.staff{ background:var(--staff) }
+.card:hover { transform: translateY(-6px) rotate(-0.3deg); box-shadow: 0 16px 28px rgba(120,50,0,0.12); }
 
-.avatar{
-  position:relative; height:120px; border-radius:14px; background:linear-gradient(180deg,#fff5e6,#fff);
-  border:1px dashed #ffd7a0; display:grid; place-items:center; margin-bottom:10px; overflow:hidden;
+.card .top-badge {
+  position: absolute; left: 50%; transform: translateX(-50%); top: -10px;
+  background: var(--badge); color:#fff; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 999px; letter-spacing: .6px;
+  border: 1px solid rgba(255,255,255,.3); z-index: 2;
 }
-.avatar img{ width:100%; height:100%; object-fit:cover; display:block }
-.name{ font-size:20px; font-weight:800; letter-spacing:.2px; margin:0; text-align:center }
-.pos{ margin:4px 0 0 0; text-align:center; color:#6a4a22; font-weight:700; font-size:13px }
+.top-badge.host { background: var(--host); }
+.top-badge.staff { background: var(--staff); }
+
+.avatar {
+  position: relative; height: 120px; border-radius: 14px; background: linear-gradient(180deg,#fff5e6,#fff);
+  border: none; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; overflow: hidden;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.name { font-size: 19px; font-weight: 800; letter-spacing: .2px; margin: 0; text-align: center; }
+.pos { margin: 4px 0 0 0; text-align: center; color: #6a4a22; font-weight: 600; font-size: 13px; }
 
 /* Track */
-.track .track-head{ display:flex; align-items:center; justify-content:space-between; font-weight:800 }
-.track .track-preview{ display:grid; place-items:center; border:2px dashed #ffc97d; border-radius:16px; min-height:180px; margin-top:10px; background:linear-gradient(180deg,#fff,#fff7ea) }
+.track { padding: 20px; }
+.track .track-preview { 
+  display: block; width: 100%; margin-top: 10px; background: transparent; 
+}
+.track .track-preview img { width: 100%; height: auto; display: block; object-fit: contain; }
 
 /* AWARDS */
-.awards { margin-top: 16px; }
-.awards-head { font-weight: 900; letter-spacing: .6px; margin-bottom: 8px; }
-.awards-grid { display:grid; grid-template-columns: repeat(5, minmax(180px,1fr)); gap:14px }
-@media (max-width:1100px){ .awards-grid{ grid-template-columns: repeat(4, minmax(160px,1fr)) } }
-@media (max-width:900px){  .awards-grid{ grid-template-columns: repeat(3, minmax(150px,1fr)) } }
-@media (max-width:650px){  .awards-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px } }
-.award.card { position:relative }
-.award .badge-sun { position:absolute; right:8px; top:-10px; font-size:20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); }
+.awards { padding: 20px; }
+.award.card { position: relative; }
+.award .badge-sun { position: absolute; right: 8px; top: -10px; font-size: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.15)); z-index: 2; }
 
 /* SAFARI SHOWDOWN */
-.showdown .title{ font-size:28px; font-weight:900; margin:6px 0 0 }
-.showdown .logo-box{ min-height:90px }
-.subhead{ font-weight:900; margin:16px 0 8px }
-.bracket{ display:grid; grid-template-columns: repeat(6, minmax(120px,1fr)); gap:12px }
-@media (max-width:900px){ .bracket{ grid-template-columns: repeat(3, minmax(120px,1fr)) } }
-@media (max-width:650px){ .bracket{ grid-template-columns: repeat(3, minmax(0,1fr)) } }
-.badge-emoji{
-  position:absolute; right:8px; top:-10px; font-size:20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.2));
-}
+.showdown { padding: 20px; }
+.showdown .title { font-size: 26px; font-weight: 900; margin: 12px 0 4px; }
+.subhead { font-weight: 800; margin: 18px 0 10px; font-size: 15px; color: var(--badge); }
+.bracket { display: grid; grid-template-columns: repeat(6, minmax(120px, 1fr)); gap: 12px; }
+@media (max-width: 900px){ .bracket { grid-template-columns: repeat(3, minmax(120px, 1fr)); } }
+@media (max-width: 650px){ .bracket { grid-template-columns: repeat(2, minmax(120px, 1fr)); } }
+.badge-emoji { position: absolute; right: 8px; top: -10px; font-size: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.2)); z-index: 2; }
 
-/* Móvil compact */
-@media (max-width:650px){
-  .wrap{ padding:10px 12px }
-  .card{ padding:10px }
-  .avatar{ height:96px }
-  .name{ font-size:16px }
-  .pos{ font-size:12px }
-  .logo-box{ min-height:72px }
-  .logo-img{ max-height:72px }
-  .track .track-preview{ min-height:120px }
-  html, body{ overflow-x:hidden }
+/* ====== SECCIÓN: VERSUS ACORDEÓN ====== */
+.versus-section { margin-top: 24px; padding: 10px 20px; }
+.versus-toggle {
+  background: transparent; border: none; width: 100%; padding: 10px 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; outline: none;
 }
+.versus-toggle .section-head { margin: 0; }
+.arrow-icon { font-size: 18px; color: var(--ink); transition: transform 0.3s ease; font-weight: bold; }
+.versus-content {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.versus-section.active .versus-content { max-height: 6000px; padding-bottom: 14px; }
+.versus-section.active .arrow-icon { transform: rotate(180deg); }
+
+.vs-block-title { font-weight: 900; font-size: 16px; color: var(--badge); margin: 10px 0 4px 0; display: flex; align-items: center; gap: 6px; }
+.vs-block-title::after { content: ''; flex: 1; height: 1px; background: #ffd7a0; }
+
+.vs-row {
+  background: rgba(255, 255, 255, 0.6); border: 1px solid #ffd7a0; border-radius: 14px;
+  padding: 12px 16px; display: flex; flex-direction: column; gap: 12px;
+}
+@media(min-width: 768px) { .vs-row { flex-direction: row; align-items: center; } }
+
+.vs-num {
+  font-weight: 900; font-size: 14px; color: var(--badge); background: #fff1dc;
+  padding: 6px 14px; border-radius: 10px; width: max-content; min-width: 75px; text-align: center;
+}
+.vs-slots { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; flex: 1; }
+
+.vs-chip { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.vs-avatar-box {
+  width: 90px; height: 60px; border-radius: 8px; background: #fff5e6; overflow: hidden;
+  box-shadow: 0 4px 10px rgba(120, 50, 0, 0.05); border: 1px solid #ffe0b9;
+}
+.vs-avatar-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vs-placement-label { font-size: 11px; font-weight: 800; color: #6a4a22; background: rgba(255, 255, 255, 0.9); padding: 1px 6px; border-radius: 4px; border: 1px solid #ffe0b9; }
+
+/* Estados de eliminación y comebacks */
+.vs-eliminated .vs-avatar-box { filter: grayscale(1); opacity: 0.6; border-color: #d1c0aa; }
+.vs-eliminated .vs-placement-label { background: #ebdcc8; color: #8a7358; }
+
+.vs-winner-glow .vs-avatar-box {
+  border: 2px solid #ffffff; box-shadow: 0 0 14px rgba(255, 154, 41, 0.9), 0 0 4px rgba(255, 154, 41, 0.4) inset;
+}
+.vs-winner-glow .vs-placement-label { background: var(--accent); color: #ffffff; border-color: #ffffff; }
+
+/* Comeback inline unificado 100% horizontal */
+.vs-comeback-inline { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; width: 100%; }
+.vs-comeback-title { font-weight: 800; font-size: 12px; color: var(--badge); padding-right: 4px; }
 </style>
 </head>
 <body>
-<!-- TOP: LOGO + BUSCAR -->
+
 <header class="wrap glass header">
 <div class="logo-zone">
-<div class="logo-box sunable" id="logoArea">
-<img alt="Logo Expedition Safari" class="logo-img" id="logoImg"/>
-</div>
+  <a href="https://thexpedition.github.io/The-Xpedition-Official/" target="_self" class="back-btn" title="Regresar">←</a>
+  <div class="logo-box" id="logoArea">
+    <img alt="Logo Expedition Safari" class="logo-img" id="logoImg"/>
+  </div>
 </div>
 <div class="tools">
-<input class="search" id="search" placeholder="Buscar participante…"/>
-<button class="btn" id="clearSearch">Limpiar</button>
+  <div class="search-wrap">
+    <input class="search" id="search" placeholder="Buscar participante…"/>
+    <button class="clear-btn" id="clearSearch">Limpiar</button>
+  </div>
 </div>
 </header>
-<!-- TEAMS (5): 3 arriba + 2 centrados -->
+
 <section class="wrap glass">
-<div class="teams-top" id="teamsTop"></div>
-<div class="teams-bottom" id="teamsBottom"></div>
+  <div class="teams-row-container" id="teamsRow"></div>
 </section>
-<!-- GRID 30 PARTICIPANTES -->
+
 <main class="wrap">
+<div class="section-head"><span>☀️ PARTICIPANTES</span></div>
 <section class="grid" id="cardGrid"></section>
 </main>
-<!-- TRACK RECORD GENERAL -->
+
+<section class="wrap glass versus-section" id="versusAccordion">
+  <button class="versus-toggle" onclick="toggleVersus()">
+    <div class="section-head"><span>⚔️ VERSUS</span></div>
+    <span class="arrow-icon">▼</span>
+  </button>
+  
+  <div class="versus-content" id="versusContainer">
+    </div>
+</section>
+
 <section class="wrap glass track">
-<div class="track-head"><span>TRACK RECORD (PNG)</span></div>
+<div class="track-head"><span>TRACK RECORD</span></div>
 <div class="track-preview"><img alt="Track Record" id="trackPreview"/></div>
 </section>
-<!-- AWARDS -->
+
 <section class="wrap glass awards">
 <div class="awards-head"><span>AWARDS</span></div>
-<div class="awards-grid" id="awardsGrid"></div>
-</section>
-<!-- SAFARI SHOWDOWN -->
+<div class="awards-grid" id="awardsGrid"></section>
+
 <section class="wrap glass showdown">
-<div class="logo-box sunable">
+<div class="logo-box">
 <img alt="Safari Showdown" class="logo-img" id="showdownLogo"/>
 </div>
 <h2 class="title">Safari Showdown</h2>
@@ -206,14 +352,18 @@ img{max-width:100%; height:auto; display:block}
 <div class="bracket" id="br2"></div>
 <div class="subhead">Bracket 3</div>
 <div class="bracket" id="br3"></div>
-<!-- Track específico de Showdown -->
-<div class="track" style="margin-top:16px">
-<div class="track-head"><span>Safari Showdown — Track Record (PNG)</span></div>
+
+<div class="track" style="margin-top:16px; padding: 0;">
+<div class="track-head"><span>Safari Showdown — Track Record</span></div>
 <div class="track-preview"><img alt="Track Showdown" id="trackShowdown"/></div>
 </div>
 </section>
+
 <script>
-/* Utilidades */
+function toggleVersus() {
+  document.getElementById('versusAccordion').classList.toggle('active');
+}
+
 const $ = (s,el=document)=>el.querySelector(s); const $$=(s,el=document)=>[...el.querySelectorAll(s)];
 function slug(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ñ/g,'n').replace(/[^a-z0-9]+/g,'').trim() }
 function tryImageCandidates(imgEl, candidates){
@@ -225,32 +375,12 @@ function tryImageCandidates(imgEl, candidates){
     tester.src = src;
   } setNext();
 }
-/* Seguir la posición del mouse para el brillo */
-document.addEventListener('mousemove', e=>{
-  document.querySelectorAll('.sunable').forEach(el=>{
-    const r = el.getBoundingClientRect();
-    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-  });
-});
-/* Tap = simular hover del brillo en móvil */
-function enableTapSun(selector){
-  document.querySelectorAll(selector).forEach(el=>{
-    el.addEventListener('touchstart', ()=>{
-      el.classList.add('tap'); setTimeout(()=> el.classList.remove('tap'), 900);
-    }, {passive:true});
-  });
-}
-document.addEventListener('DOMContentLoaded', ()=>{
-  enableTapSun('.avatar.sunable');
-  enableTapSun('.team-card .square.sunable');
-});
 
 /* LOGO superior y Track */
 tryImageCandidates($('#logoImg'), ['Personajes/logo-safari.png','Personajes/LogoSafari.png','Personajes/logo.png','Personajes/Logo.png']);
 tryImageCandidates($('#trackPreview'), ['Personajes/Track Record.png','Personajes/TrackRecord.png','Personajes/track.png']);
 
-/* ===== Equipos (5) ===== */
+/* ===== Equipos Unificados en una sola Fila ===== */
 const teamsData = [
   {name:'Equipo Leonés',    class:'team-1', candidates:['Personajes/EquipoLeones.png','Personajes/Leones.png','Personajes/Leon.png']},
   {name:'Equipo Serpientes',class:'team-2', candidates:['Personajes/EquipoSerpientes.png','Personajes/Serpientes.png','Personajes/Serpiente.png']},
@@ -258,53 +388,71 @@ const teamsData = [
   {name:'Equipo Guepardos', class:'team-4', candidates:['Personajes/EquipoGuepardos.png','Personajes/Guepardos.png','Personajes/Guepardo.png']},
   {name:'Equipo Escorpiones',class:'team-5', candidates:['Personajes/EquipoEscorpiones.png','Personajes/Escorpiones.png','Personajes/Escorpion.png']}
 ];
-const teamsTop = $('#teamsTop'); const teamsBottom = $('#teamsBottom');
-teamsData.slice(0,3).forEach(t=>{
+const teamsRow = $('#teamsRow');
+teamsData.forEach(t=>{
   const card = document.createElement('div'); card.className=`team-card ${t.class}`;
   card.innerHTML = `
     <div class="team-media">
-      <div class="square sunable"><img class="square-img" alt="${t.name}"></div>
+      <div class="square"><img class="square-img" alt="${t.name}"></div>
     </div>
     <div class="team-info"><h3 class="team-name">${t.name}</h3></div>`;
-  teamsTop.appendChild(card);
-  tryImageCandidates(card.querySelector('img'), t.candidates);
-});
-teamsData.slice(3).forEach(t=>{
-  const card = document.createElement('div'); card.className=`team-card ${t.class}`;
-  card.innerHTML = `
-    <div class="team-media">
-      <div class="square sunable"><img class="square-img" alt="${t.name}"></div>
-    </div>
-    <div class="team-info"><h3 class="team-name">${t.name}</h3></div>`;
-  teamsBottom.appendChild(card);
+  teamsRow.appendChild(card);
   tryImageCandidates(card.querySelector('img'), t.candidates);
 });
 
-/* ===== Participantes (30) ===== */
-/* Orden exacto (Bonju=29 Host, Dua=30 Staff). Se omite “Ignacio” para mantener 30. */
-const participants = [
-  'Coronel','Peggy','Julián','Alexandro','Isabel','Pier',
-  'Bryan Montalvo','Daelly','Andromeda','Luciano','Iñaella Rose','Ximena',
-  /* 'Ignacio', */ 'Ignacio Ricci','Lucas Mendez','Greg','Garnet','Elvin',
-  'Bayron','Oscar','Sandro','Esteban','Rafael','Emmy Mango','Lalamila',
-  'Cocomong','Azealia Midnight','Eris Midnight','Catalina','Bonju','Dua Lengua'
+/* ===== Participantes Ordenados con su respectivo Placement ===== */
+const participantsData = [
+  {name:'Coronel', placement:'Runner Up'},
+  {name:'Peggy', placement:'Runner Up'},
+  {name:'Julián', placement:'3rd Place'},
+  {name:'Alexandro', placement:'4th Place'},
+  {name:'Isabel', placement:'5th/6th Place'},
+  {name:'Pier', placement:'5th/6th Place'},
+  {name:'Bryan Montalvo', placement:'7th Place'},
+  {name:'Daelly', placement:'8th Place'},
+  {name:'Andromeda', placement:'9th Place'},
+  {name:'Luciano', placement:'10th Place'},
+  {name:'Iñaella Rose', placement:'11th Place'},
+  {name:'Ximena', placement:'12th Place'},
+  {name:'Ignacio Ricci', placement:'13th Place'},
+  {name:'Lucas Mendez', placement:'14th Place'},
+  {name:'Greg', placement:'15th Place'},
+  {name:'Garnet', placement:'16th Place'},
+  {name:'Elvin', placement:'17th Place'},
+  {name:'Bayron', placement:'18th Place'},
+  {name:'Oscar', placement:'19th Place'},
+  {name:'Sandro', placement:'20th Place'},
+  {name:'Esteban', placement:'21st Place'},
+  {name:'Rafael', placement:'22nd Place'},
+  {name:'Emmy Mango', placement:'23rd Place'},
+  {name:'Lalamila', placement:'24th Place'},
+  {name:'Cocomong', placement:'25th Place'},
+  {name:'Azealia Midnight', placement:'26th Place'},
+  {name:'Eris Midnight', placement:'27th Place'},
+  {name:'Catalina', placement:'28th Place'},
+  {name:'Bonju', badge:'host', placement:null},
+  {name:'Dua Lengua', badge:'staff', placement:null}
 ];
+
 const grid = $('#cardGrid');
-participants.forEach((name, idx)=>{
+participantsData.forEach((p, idx)=>{
   const card = document.createElement('article'); card.className = 'card';
-  if(idx===28){ const b=document.createElement('div'); b.className='top-badge host'; b.textContent='HOST'; card.appendChild(b); }
-  if(idx===29){ const b=document.createElement('div'); b.className='top-badge staff'; b.textContent='STAFF'; card.appendChild(b); }
-  const av = document.createElement('div'); av.className='avatar sunable';
+  if(p.badge==='host'){ const b=document.createElement('div'); b.className='top-badge host'; b.textContent='HOST'; card.appendChild(b); }
+  if(p.badge==='staff'){ const b=document.createElement('div'); b.className='top-badge staff'; b.textContent='STAFF'; card.appendChild(b); }
+  
+  const av = document.createElement('div'); av.className='avatar';
   const img = document.createElement('img'); av.appendChild(img);
   card.appendChild(av);
-  const h3 = document.createElement('h3'); h3.className='name'; h3.textContent=name; card.appendChild(h3);
-  const pos = document.createElement('div'); pos.className='pos'; pos.textContent=''; card.appendChild(pos);
+  
+  const h3 = document.createElement('h3'); h3.className='name'; h3.textContent=p.name; card.appendChild(h3);
+  const pos = document.createElement('div'); pos.className='pos'; pos.textContent=p.placement || ''; card.appendChild(pos);
   grid.appendChild(card);
-  const base = slug(name);
+  
+  const base = slug(p.name);
   tryImageCandidates(img, [
-    `Personajes/${name}.png`,`Personajes/${name}.jpg`,`Personajes/${name}.jpeg`,
+    `Personajes/${p.name}.png`,`Personajes/${p.name}.jpg`,`Personajes/${p.name}.jpeg`,
     `Personajes/${base}.png`,`Personajes/${base}.jpg`,`Personajes/${base}.jpeg`,
-    `Personajes/${(name.split(' ')[0]||'').trim()}.png`,`Personajes/${(name.split(' ')[0]||'').trim()}.jpg`
+    `Personajes/${(p.name.split(' ')[0]||'').trim()}.png`
   ]);
 });
 
@@ -318,6 +466,146 @@ $('#search').addEventListener('input', ()=>{
 });
 $('#clearSearch').addEventListener('click', ()=>{ $('#search').value=''; $('#search').dispatchEvent(new Event('input')); });
 
+/* ===== GENERADOR DE CHIPS DE ICONOS PARA VERSUS ===== */
+function createVsChip(pName, index, isEliminated, isWinnerGlow) {
+  const chip = document.createElement('div');
+  chip.className = 'vs-chip';
+  if(isEliminated) chip.className += ' vs-eliminated';
+  if(isWinnerGlow) chip.className += ' vs-winner-glow';
+
+  const box = document.createElement('div');
+  box.className = 'vs-avatar-box';
+
+  const img = document.createElement('img');
+  img.alt = pName;
+  const base = slug(pName);
+  tryImageCandidates(img, [
+    `Personajes/${pName}.png`,`Personajes/${base}.png`,`Personajes/${pName.split(' ')[0]}.png`
+  ]);
+
+  box.appendChild(img);
+  chip.appendChild(box);
+
+  const label = document.createElement('span');
+  label.className = 'vs-placement-label';
+  label.textContent = index + '°';
+  chip.appendChild(label);
+
+  return chip;
+}
+
+/* ====== INYECCIÓN DE DATOS DE VERSUS ====== */
+const versusDataset = [
+  {
+    year: "2023",
+    episodes: [
+      { ep: "1", players: ["Ignacio Ricci", "Bryan Montalvo", "Cocomong", "Catalina"] },
+      { ep: "2", players: ["Azealia Midnight", "Cocomong", "Sandro", "Eris Midnight"] },
+      { ep: "3", players: ["Andromeda", "Elvin", "Garnet", "Lalamila", "Azealia Midnight"] },
+      { ep: "4", players: ["Isabel", "Rafael", "Esteban", "Cocomong"] },
+      { ep: "5", players: ["Emmy Mango", "Bayron", "Julián", "Lalamila", "Garnet"] },
+      { ep: "6", players: ["Bryan Montalvo", "Julián", "Ximena", "Sandro"] },
+      { ep: "7", players: ["Julián", "Bryan Montalvo", "Bayron", "Lalamila"] },
+      { ep: "8", players: ["Isabel", "Sandro", "Esteban", "Oscar"] },
+      { ep: "9", players: ["Bayron", "Andromeda", "Oscar", "Esteban"] },
+      { ep: "10", players: ["Isabel", "Ignacio Ricci", "Sandro"] },
+      {
+        ep: "11",
+        isComeback: true,
+        winner: "Garnet",
+        list: ["Garnet", "Esteban", "Eris Midnight", "Sandro", "Lalamila", "Azealia Midnight", "Cocomong", "Catalina"]
+      },
+      { ep: "12", players: ["Ignacio Ricci", "Ximena", "Bayron", "Oscar"], doubleElim: true },
+      { ep: "13", players: ["Coronel", "Elvin", "Andromeda"] },
+      { ep: "14", players: ["Isabel", "Coronel", "Elvin"] },
+      { ep: "15", players: ["Isabel", "Bryan Montalvo", "Garnet"] }
+    ]
+  },
+  {
+    year: "2025",
+    episodes: [
+      { ep: "16", players: ["Coronel", "Lucas Mendez"], isDueloVictoria: true },
+      { ep: "17", players: ["Julián", "Peggy", "Greg"] },
+      { ep: "18", players: ["Daelly", "Luciano", "Ximena", "Lucas Mendez"] },
+      { ep: "19", players: ["Alexandro", "Iñaella Rose", "Ignacio Ricci"] },
+      { ep: "20", players: ["Iñaella Rose", "Isabel", "Bryan Montalvo", "Ximena"] },
+      { ep: "21", players: ["Julián", "Luciano", "Iñaella Rose"] },
+      { ep: "22", players: ["Peggy", "Luciano"] },
+      { ep: "23", players: ["Pier", "Isabel", "Bryan Montalvo", "Alexandro", "Andromeda"] },
+      { ep: "24", players: ["Julián", "Coronel", "Peggy", "Bryan Montalvo"] },
+      {
+        ep: "25",
+        isComeback: true,
+        winner: "Bryan Montalvo",
+        list: ["Bryan Montalvo", "Lucas Mendez", "Luciano", "Ignacio Ricci", "Andromeda", "Ximena", "Iñaella Rose", "Greg"]
+      },
+      { ep: "28", players: ["Julián", "Alexandro"] },
+      { ep: "30", players: ["Coronel", "Peggy", "Julián"] }
+    ]
+  }
+];
+
+const vsContainer = document.getElementById('versusContainer');
+versusDataset.forEach(block => {
+  const bTitle = document.createElement('div');
+  bTitle.className = 'vs-block-title';
+  bTitle.innerHTML = '<span>* ' + block.year + ' *</span>';
+  vsContainer.appendChild(bTitle);
+
+  block.episodes.forEach(vs => {
+    const row = document.createElement('div');
+    row.className = 'vs-row';
+
+    const num = document.createElement('span');
+    num.className = 'vs-num';
+    num.textContent = 'EP ' + vs.ep;
+    row.appendChild(num);
+
+    const slots = document.createElement('div');
+    slots.className = 'vs-slots';
+
+    if (vs.isComeback) {
+      const inlineWrap = document.createElement('div');
+      inlineWrap.className = 'vs-comeback-inline';
+
+      const labelTitle = document.createElement('span');
+      labelTitle.className = 'vs-comeback-title';
+      labelTitle.textContent = 'COMEBACK:';
+      inlineWrap.appendChild(labelTitle);
+
+      vs.list.forEach((pName, idx) => {
+        const isWin = (pName === vs.winner);
+        const chip = createVsChip(pName, idx + 1, !isWin, isWin);
+        inlineWrap.appendChild(chip);
+      });
+      slots.appendChild(inlineWrap);
+    } else {
+      vs.players.forEach((pName, idx) => {
+        let isElim = false;
+        if (!vs.isDueloVictoria) {
+          if (vs.doubleElim) {
+            isElim = (idx === vs.players.length - 1 || idx === vs.players.length - 2);
+          } else {
+            isElim = (idx === vs.players.length - 1);
+          }
+        }
+        
+        const chip = createVsChip(pName, idx + 1, isElim, false);
+        slots.appendChild(chip);
+
+        if (vs.isDueloVictoria && idx === 0) {
+          const sep = document.createElement('span');
+          sep.className = 'vs-separator';
+          sep.textContent = 'vs';
+          slots.appendChild(sep);
+        }
+      });
+    }
+    row.appendChild(slots);
+    vsContainer.appendChild(row);
+  });
+});
+
 /* ===== AWARDS ===== */
 const awardsData = [
   {name:'Mister Congeniality', icon:'☀️', slug:'mistercongeniality'},
@@ -330,7 +618,7 @@ const awardsGrid = document.getElementById('awardsGrid');
 awardsData.forEach(a=>{
   const card = document.createElement('article'); card.className='card award';
   const badge = document.createElement('div'); badge.className='badge-sun'; badge.textContent=a.icon; card.appendChild(badge);
-  const avatar = document.createElement('div'); avatar.className='avatar sunable';
+  const avatar = document.createElement('div'); avatar.className='avatar';
   const img = document.createElement('img'); avatar.appendChild(img); card.appendChild(avatar);
   const title = document.createElement('h3'); title.className='name'; title.textContent=a.name; card.appendChild(title);
   const pos = document.createElement('div'); pos.className='pos'; pos.textContent=''; card.appendChild(pos);
@@ -344,50 +632,24 @@ awardsData.forEach(a=>{
 tryImageCandidates($('#showdownLogo'), ['Personajes/SafariShowdown.png','Personajes/Showdown.png']);
 tryImageCandidates($('#trackShowdown'), ['Personajes/Track Showdown.png','Personajes/TrackShowdown.png']);
 
-/* ———> NUEVO: carpeta exclusiva para las imágenes del Showdown */
 const SHOWDOWN_DIR = 'Personajes/Showdown/';
 function showdownCandidates(name){
   const base = slug(name);
-  const enc  = encodeURIComponent(name);
   return [
-    `${SHOWDOWN_DIR}${enc}.png`,
-    `${SHOWDOWN_DIR}${enc}.jpg`,
-    `${SHOWDOWN_DIR}${base}.png`,
-    `${SHOWDOWN_DIR}${base}.jpg`,
-    // Fallback especial si pones “Bryan” pero tu archivo se llama “Bryan Montalvo”
-    ...(name==='Bryan' ? [
-      `${SHOWDOWN_DIR}Bryan%20Montalvo.png`,
-      `${SHOWDOWN_DIR}Bryan%20Montalvo.jpg`,
-      `${SHOWDOWN_DIR}bryanmontalvo.png`,
-      `${SHOWDOWN_DIR}bryanmontalvo.jpg`
-    ] : [])
+    `${SHOWDOWN_DIR}${name}.png`,`${SHOWDOWN_DIR}${name}.jpg`,
+    `${SHOWDOWN_DIR}${base}.png`,`${SHOWDOWN_DIR}${base}.jpg`,
+    ...(name==='Bryan' ? [`${SHOWDOWN_DIR}Bryan%20Montalvo.png`,`${SHOWDOWN_DIR}bryanmontalvo.png`] : [])
   ];
 }
 
-/* Brackets (los dejo tal cual los tienes) */
 const bracket1 = [
-  {name:'Alexandro', mark:'✅'},
-  {name:'Bayron'},
-  {name:'Garnet'},
-  {name:'Greg'},
-  {name:'Isabel', mark:'✅'},
-  {name:'Rafael', mark:'✅'}
+  {name:'Alexandro', mark:'✅'},{name:'Bayron'},{name:'Garnet'},{name:'Greg'},{name:'Isabel', mark:'✅'},{name:'Rafael', mark:'✅'}
 ];
 const bracket2 = [
-  {name:'Andromeda'},
-  {name:'Eris Midnight', mark:'✅'},
-  {name:'Esteban', mark:'🍀'},
-  {name:'Ignacio Ricci', mark:'✅'},
-  {name:'Lalamila', mark:'✅'},
-  {name:'Pier'}
+  {name:'Andromeda'},{name:'Eris Midnight', mark:'✅'},{name:'Esteban', mark:'🍀'},{name:'Ignacio Ricci', mark:'✅'},{name:'Lalamila', mark:'✅'},{name:'Pier'}
 ];
 const bracket3 = [
-  {name:'Bryan'},
-  {name:'Catalina'},
-  {name:'Iñaella Rose'},
-  {name:'Lucas Mendez', mark:'✅'},
-  {name:'Luciano', mark:'✅'},
-  {name:'Oscar', mark:'✅'}
+  {name:'Bryan'},{name:'Catalina'},{name:'Iñaella Rose'},{name:'Lucas Mendez', mark:'✅'},{name:'Luciano', mark:'✅'},{name:'Oscar', mark:'✅'}
 ];
 
 function fillBracket(el, arr){
@@ -396,13 +658,11 @@ function fillBracket(el, arr){
     if(item.mark){
       const b = document.createElement('div'); b.className='badge-emoji'; b.textContent=item.mark; card.appendChild(b);
     }
-    const av = document.createElement('div'); av.className='avatar sunable';
+    const av = document.createElement('div'); av.className='avatar';
     const img = document.createElement('img'); av.appendChild(img); card.appendChild(av);
     const nm = document.createElement('h3'); nm.className='name'; nm.textContent=item.name; card.appendChild(nm);
     const ps = document.createElement('div'); ps.className='pos'; ps.textContent=''; card.appendChild(ps);
     el.appendChild(card);
-
-    // ———> NUEVO: siempre buscar en Personajes/Showdown/
     tryImageCandidates(img, showdownCandidates(item.name));
   });
 }
